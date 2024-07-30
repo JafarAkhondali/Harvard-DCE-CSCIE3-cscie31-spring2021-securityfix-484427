@@ -14,6 +14,11 @@ const server = http.createServer((req, res) => {
 	console.log(parsedUrl);
   // extract the pathname and query properties
 	const { pathname, query } = parsedUrl;
+	if (path.normalize(decodeURI(pathname)) !== decodeURI(pathname)) {
+	    res.statusCode = 403;
+	    res.end();
+	    return;
+	}
 
 	// output absolute path info
 	console.log('__dirname is %s', __dirname);
